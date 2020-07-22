@@ -1,27 +1,41 @@
 import React from 'react'
-import { ReactComponent } from '*.svg';
 
-class Accordion extends ReactComponent{
-    static props = {
-        section: []
+
+class Accordion extends React.Component {
+    static defaultProps = {
+        sections: [],
     };
-    render() {
-        console.log(this.section)
-        return (
-            <div >
-                <p>hello</p>
-                <ul>
-                    <li>
-                        <button>{this.props.section.name}</button>
-                        <p>
-                            this appears when the button is pushed
-                        </p>
-                    </li>
-                </ul>
-            </div>
-        )
 
+    state = {
+        activeSectionIndex: null,
+    }
+
+    handleActiveSection = (sectionIndex) => {
+        this.setState({ activeSectionIndex: sectionIndex })
+    }
+
+    renderItem(section, idx, activeSectionIndex) {
+        return (
+            <li className='Accordion__item' key={idx}>
+                <button type='button' onClick={() => this.handleActiveSection(idx)} > 
+                {section.title} 
+                </button>
+                {(activeSectionIndex === idx) && <p>{section.content}</p>}
+            </li>)
+    }
+
+    render() {
+        const { activeSectionIndex } = this.state
+        const { sections } = this.props
+        return (
+            <ul className='Accordion'> 
+            {sections.map((section, idx) => 
+            this.renderItem(section, idx, activeSectionIndex)
+            )}
+            </ul>
+        )
     }
 }
+
 
 export default Accordion
