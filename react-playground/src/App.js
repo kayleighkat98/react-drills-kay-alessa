@@ -1,11 +1,13 @@
 import React from 'react';
+import Accordion from './state-drills/Accordion';
 
-function App() {
+const accordionContent =[
+  {name: 'test'}
+];
+class App 
+
+export default () {
   return (
-    <main className='App'>
-      {/* content goes here */}
-    </main>
-  );
+    <Accordion/>
+  )
 }
-
-export default App;
